@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 300px;
+    }
+    input {
+      width: 80%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 8px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .weather {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Weather Info</h2>
+    <input type="text" id="cityInput" placeholder="Enter city name" />
+    <button onclick="getWeather()">Get Weather</button>
+    <div class="weather" id="weatherDisplay"></div>
+  </div>
+
+  <script>
+    async function getWeather() {
+      const city = document.getElementById('cityInput').value.trim();
+      const display = document.getElementById('weatherDisplay');
+      const apiKey = '0f73826103d921d61d344fe231f9217f'; // Your API key here
+
+      if (!city) {
+        display.innerHTML = '<p class="error">Please enter a city name.</p>';
+        return;
+      }
+
+      display.innerHTML = '<p>Loading...</p>';
+
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.cod !== 200) {
+          display.innerHTML = `<p class="error">${data.message}</p>`;
+        } else {
+          const weatherHTML = `
+            <h3>${data.name}, ${data.sys.country}</h3>
+            <p><strong>${data.weather[0].main}</strong> - ${data.weather[0].description}</p>
+            <p>🌡️ Temp: ${data.main.temp} °C</p>
+            <p>💨 Wind: ${data.wind.speed} m/s</p>
+            <p>📅 Updated: ${new Date().toLocaleTimeString()}</p>
+          `;
+          display.innerHTML = weatherHTML;
+        }
+      } catch (error) {
+        display.innerHTML = '<p class="error">Error fetching data. Please try again later.</p>';
+      }
+    }
+  </script>
+</body>
+</html>

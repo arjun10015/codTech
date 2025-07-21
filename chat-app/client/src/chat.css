@@ -1,0 +1,101 @@
+/* App.css */
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.chat-header {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.chat-box {
+  border: 1px solid #ccc;
+  height: 300px;
+  overflow-y: scroll;
+  padding: 10px;
+  border-radius: 5px;
+  background: #fafafa;
+  margin-bottom: 10px;
+}
+
+.message {
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+}
+
+.message.you {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.message.other {
+  align-self: flex-start;
+  text-align: left;
+}
+
+.bubble {
+  padding: 8px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.you .bubble {
+  background: #acf;
+  color: black;
+}
+
+.other .bubble {
+  background: #eee;
+  color: black;
+}
+
+.message-from {
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border: none;
+  background-color: #2196F3;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #1976D2;
+}
